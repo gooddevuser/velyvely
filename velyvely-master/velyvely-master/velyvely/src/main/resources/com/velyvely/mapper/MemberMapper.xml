@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.velyvely.mapper.MemberMapper">
+
+	<select id="selectMemberBymemberidAndpasswd" parameterType="com.velyvely.vo.Member" resultType="com.velyvely.vo.Member">
+		select *
+		from Member
+		where id = #{id} and passwd = #{passwd}
+	</select>
+	
+	<select id="selectMembers" resultType="com.velyvely.vo.Member">
+		select *
+		from Member
+	</select>
+	
+	<insert id="insertMember" parameterType="com.velyvely.vo.Member"
+		useGeneratedKeys="true" keyColumn="memberid" keyProperty="memberid">
+		insert into member(memberid,usertype,id,passwd,name,email,gender,birthday,phone,address,createddatetime)
+		values (#{memberid},#{usertype},#{id},#{passwd},#{name},#{email},#{gender},#{birthday},#{phone},#{address}, now())
+	</insert>	
+	
+	<insert id="insertMemberFileList" parameterType="com.velyvely.vo.MemberFile">
+		INSERT INTO memberfile
+		(memberid, userfilename, savedfilename, filesize, creatorid, createddatetime)
+		VALUES
+			<foreach collection="list" item="item" separator=",">
+			(#{item.memberid}, #{item.userfilename}, #{item.savedfilename}, #{item.filesize}, #{item.creatorid}, now())
+			</foreach>	
+	</insert>
+	
+</mapper>

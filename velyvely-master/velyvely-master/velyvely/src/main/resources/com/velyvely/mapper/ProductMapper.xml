@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+		   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.velyvely.mapper.ProductMapper">
+	
+	<select id="selectProductByClothes" resultType="com.velyvely.vo.Product">
+		select *
+		from Product
+		Where categoryA = '의류'
+	</select>
+	
+	<select id="selectProductByAccessories" resultType="com.velyvely.vo.Product">
+		select *
+		from Product
+		Where categoryA = '악세사리'
+	</select>
+	
+	<select id="selectProductByUnderclothes" resultType="com.velyvely.vo.Product">
+		select *
+		from Product
+		Where categoryA = '속옷'
+	</select>
+	
+	<select id="selectProduct" resultType="com.velyvely.vo.Product">
+		select *
+		from Product
+	</select>
+	
+	<insert id="insertProduct" parameterType="com.velyvely.vo.Product"
+		useGeneratedKeys="true" keyColumn="productid" keyProperty="productid">
+		insert into product(productid,categoryA,categoryB,productname,contents,color,ssize,msize,lsize,elsize,price,amount,saleprice,shipping)
+		values (#{productid},#{categoryA},#{categoryB},#{productname},#{contents},#{color},#{ssize},#{msize},#{lsize},#{elsize},#{price},#{amount},#{saleprice},#{shipping})
+	</insert>	
+	
+	<insert id="insertProductFileList" parameterType="com.velyvely.vo.ProductFile">
+		INSERT INTO productfile
+		(productid, userfilename, savedfilename, filesize, creatorid, createddatetime)
+		VALUES
+			<foreach collection="list" item="item" separator=",">
+			(#{item.productid}, #{item.userfilename}, #{item.savedfilename}, #{item.filesize}, #{item.creatorid}, now())
+			</foreach>	
+	</insert>
+	
+	<select id="selectProductByproductid" parameterType="int" resultType="com.velyvely.vo.Product">
+		select *
+		from Product
+		where productid = #{productid}
+	</select>
+	
+	<select id="selectProductByproductname" parameterType="String" resultType="com.velyvely.vo.Product">
+		select *
+		from Product
+		where productname like concat('%',#{productname},'%')
+	</select>
+</mapper>

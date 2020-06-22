@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Checkout</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/checkout.css">
+<link rel="stylesheet" type="text/css" href="styles/checkout_responsive.css">
+<style type="text/css">
+button {font-size:15px !important; letter-spacing:-1px !important;}
+.review_form_button {background-color:black;}
+.checkout_title{font-family: 'Open Sans', sans-serif;}
+.form_button {    width: 179px;
+    height: 46px;
+    border: none;
+    outline: none;
+    background: black;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    margin-top: 18px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;}
+</style>
+</head>
+<body>
+
+<div class="super_container">
+	
+	<adminheader th:include="adminheader :: adminheader"> </adminheader>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/categories.jpg" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_container">
+						<div class="home_content">
+							<div class="home_title">Banner</div>
+							<div class="breadcrumbs">
+								<ul>
+									<li><a href="admin">admin</a></li>
+									<li>Banner</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Checkout -->
+
+	<div class="checkout">
+		<div class="container">
+			<div class="row">
+
+				<!-- Billing Details -->
+				<div class="col-lg-12">
+					<div class="billing">
+						<div class="checkout_title">배너등록</div>						
+						
+							<form action="adminProduct" id="checkout_form" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="creatorid" id="creatorid" th:value="creator">
+								<div class="checkout_form_container">
+								<select class="country_select checkout_input" th:name="category" id="category">
+									<option value="슬라이드배너">슬라이드배너</option>
+									<option value="세일배너">세일배너</option>
+									<option value="신상품배너">신상품배너</option>
+									<option value="기획전배너">기획전배너</option>
+									<option value="해쉬태그배너">해쉬태그배너</option>
+								</select>
+								
+								<!--
+								<div class="d-flex flex-lg-row flex-column align-items-start justify-content-between">
+									<input type="file" name="files" id="files" multiple="multiple" class="checkout_input checkout_input_33" style="padding-top: 13px; padding-left: 65px;" required="required">
+									<input type="file" name="files" id="files" multiple="multiple"class="checkout_input checkout_input_33" style="padding-top: 13px; padding-left: 65px;" required="required">
+									<input type="file" name="files" id="files" multiple="multiple"class="checkout_input checkout_input_33" style="padding-top: 13px; padding-left: 65px;" required="required">
+								 </div>
+								 -->
+								 
+								<input type="text" class="checkout_input" th:name="headerA" id="headerA" placeholder="타이틀1">
+								<input type="text" class="checkout_input" th:name="titleA" id="titleA" placeholder="제목1">
+								<input type="text" class="checkout_input" th:name="subtitleA" id="subtitleA" placeholder="소제목1">
+								<textarea class="checkout_comment" th:name="contentsA" id="contentsA" placeholder="내용1" style="margin-bottom: 22px;"></textarea>
+								
+								<input type="text" class="checkout_input" th:name="headerB" id="headerB" placeholder="타이틀2">								
+								<input type="text" class="checkout_input" th:name="titleB" id="titleB" placeholder="제목2">
+								<input type="text" class="checkout_input" th:name="subtitleB" id="subtitleB" placeholder="소제목2">
+								<textarea class="checkout_comment" th:name="contentsB" id="contentsB" placeholder="내용2" style="margin-bottom: 22px;"></textarea>
+								
+								<input type="text" class="checkout_input" th:name="titleC" id="titleC" placeholder="제목3">
+								<input type="text" class="checkout_input" th:name="subtitleC" id="subtitleC" placeholder="소제목3">	
+								
+								<button type="submit" class="form_button">제품 등록하기</button>
+								</div>
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"> </footer>
+	
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/checkout_custom.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+$('#titleA').show();
+$('#titleB').show();
+$('#titleC').show();
+$('#headerA').hide();
+$('#headerB').hide();
+$('#subtitleA').hide();
+$('#subtitleB').hide();
+$('#subtitleC').hide();
+$('#contentsA').hide();
+$('#contentsB').hide();
+
+$('#category').change(function() {
+	var state = jQuery('#category option:selected').val();
+	if ( state == '슬라이드배너' ) {
+		$('#titleA').show();
+		$('#titleB').show();		
+		$('#titleC').show();
+		
+		$('#headerA').hide();
+		$('#headerB').hide();
+		$('#subtitleA').hide();
+		$('#subtitleB').hide();
+		$('#subtitleC').hide();
+		$('#contentsA').hide();
+		$('#contentsB').hide();
+		
+	} else if ( state == '세일배너' ) {
+		$('#headerA').show();
+		$('#headerB').show();
+		$('#titleA').show();
+		$('#titleB').show();
+		$('#subtitleA').show();
+		$('#subtitleB').show();
+		
+		$('#titleC').hide();
+		$('#subtitleC').hide();
+		$('#contentsA').hide();
+		$('#contentsB').hide();
+		
+	} else if ( state == '신상품배너' ) {
+		$('#headerA').show();
+		$('#headerB').show();
+		
+		$('#titleA').hide();
+		$('#titleB').hide();
+		$('#titleC').hide();
+		$('#subtitleA').hide();
+		$('#subtitleB').hide();			
+		$('#subtitleC').hide();
+		$('#contentsA').hide();
+		$('#contentsB').hide();
+		
+	} else if ( state == '기획전배너' ) {
+		$('#titleA').show();
+		$('#titleB').show();
+		$('#subtitleA').show();
+		$('#subtitleB').show();
+		$('#contentsA').show();
+		$('#contentsB').show();
+		
+		$('#headerA').hide();
+		$('#headerB').hide();
+		$('#titleC').hide();		
+		$('#subtitleC').hide();
+		
+	} else {
+		$('#titleA').show();
+		$('#subtitleA').show();
+		
+		$('#headerA').hide();
+		$('#headerB').hide();
+		$('#titleB').hide();
+		$('#titleC').hide();
+		$('#subtitleB').hide();			
+		$('#subtitleC').hide();
+		$('#contentsA').hide();
+		$('#contentsB').hide();
+	};
+});
+
+</script>
+
+</body>
+</html>

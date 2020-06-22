@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Product</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/product.css">
+<link rel="stylesheet" type="text/css" href="styles/product_responsive.css">
+<style type="text/css">
+button {font-size:15px !important; letter-spacing:-1px !important;}
+.review_form_button {background-color:black;}
+.reviews_title{font-family: 'Open Sans', sans-serif;}
+li.clearfix {padding: 25px;}
+li.clearfix:nth-child(2n) { background-color: #fff; }
+li.clearfix:nth-child(2n)>.review_content .review_name a,
+li.clearfix:nth-child(2n)>.review_content .review_date ,
+li.clearfix:nth-child(2n)>.review_content .review_rating { color:black; }
+li.clearfix:nth-child(2n+1) { background-color: #e0e3e4; }
+li.clearfix:nth-child(2n+1)>.review_content .review_name a,
+li.clearfix:nth-child(2n+1)>.review_content .review_date ,
+li.clearfix:nth-child(2n+1)>.review_content .review_rating{ color:black; }
+div.review_image { box-shadow: 20px 10px 42px -10px black; }
+</style>
+</head>
+<body>
+
+<div class="super_container">
+	
+	<adminheader th:include="adminheader :: adminheader"> </adminheader>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/product.jpg" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_container">
+						<div class="home_content">
+							<div class="home_title">MemberList</div>
+							<div class="breadcrumbs">
+								<ul>
+									<li><a href="admin">admin</a></li>
+									<li>MemberList</li>
+								</ul>
+							</div>							
+							<div class="search header_search" style="margin-top: 20px; width:100%;">						
+								<form action="#">
+									<input type="search" class="search_input" required="required">
+									<button type="submit" id="search_button" class="search_button"><img src="images/magnifying-glass.svg" alt=""></button>
+								</form>								
+							</div>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product -->
+
+		<div class="container">
+
+			<!-- Reviews -->
+
+			<div class="row">
+				<div class="col">
+					<div class="reviews">
+						<div class="reviews_title">고객목록</div>
+						<div class="reviews_container">
+						
+							<ul>
+								<!-- Review -->
+								<li th:if="${ #lists.size(members) } > 0" th:each="member : ${ members }" class="clearfix">
+									
+									<div th:each="file : ${ member.fileList }" class="review_image">
+									<a href="#" th:style="'background-image: url(' + @{/upload-files/} + ${ file.savedfilename } + ')'"></a>
+			    					</div>
+			    					
+									<div class="review_content">
+										<div class="review_name"><a href="#" th:text="${ member.memberid }" style="margin-right: 6px;"></a><a href="#" th:text="${ member.name }+님"></a></div>																			
+										<div class="review_name"><a href="#" th:text="${ member.id }" style="font-size: 23px; font-weight: 900;"></a></div>	
+										<div class="review_date" th:text="${ member.email }"></div>
+										<hr>
+										<div class="rating rating_4 review_rating" data-rating="4">
+										</div>
+										<div class="review_name"><a href="#" th:text="${ member.usertype }"></a></div>
+										<div class="review_date" th:text="${ member.phone }"></div>
+										<div class="review_date" th:text="가입날짜 +${ member.createddatetime }"></div>
+										<hr>
+										<div class="review_name"><a href="#" th:text="${ member.address }"></a></div>
+										</div>
+									</div>
+								</li>
+																
+							</ul>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<footer th:include="footer :: footer"> </footer>
+
+	
+	
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/product_custom.js"></script>
+</body>
+</html>

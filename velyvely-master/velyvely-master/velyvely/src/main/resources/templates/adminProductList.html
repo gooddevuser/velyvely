@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Product</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/product.css">
+<link rel="stylesheet" type="text/css" href="styles/product_responsive.css">
+<style type="text/css">
+button {font-size:15px !important; letter-spacing:-1px !important;}
+.review_form_button {background-color:black;}
+.reviews_title{font-family: 'Open Sans', sans-serif;}
+li.clearfix {padding: 25px;}
+li.clearfix:nth-child(2n) { background-color: #e0e3e4; }
+li.clearfix:nth-child(2n)>.review_content .review_name a,
+li.clearfix:nth-child(2n)>.review_content .review_date ,
+li.clearfix:nth-child(2n)>.review_content .review_rating { color:black;}
+li.clearfix:nth-child(2n+1) { background-color: #fff; }
+li.clearfix:nth-child(2n+1)>.review_content .review_name a,
+li.clearfix:nth-child(2n+1)>.review_content .review_date ,.review_date a,
+li.clearfix:nth-child(2n+1)>.review_content .review_rating{ color:black; }
+div.review_image { box-shadow: 20px 10px 42px -10px black; }
+</style>
+</head>
+<body>
+
+<div class="super_container">
+	
+	<adminheader th:include="adminheader :: adminheader"> </adminheader>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/product.jpg" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_container">
+						<div class="home_content">
+							<div class="home_title">ProductList</div>
+							<div class="breadcrumbs">
+								<ul>
+									<li><a href="admin">admin</a></li>
+									<li>ProductList</li>
+								</ul>
+							</div>														
+							<div class="search header_search" style="margin-top: 20px; width:100%;">						
+								<form action="#">
+									<input type="search" class="search_input" required="required">
+									<button type="submit" id="search_button" class="search_button"><img src="images/magnifying-glass.svg" alt=""></button>
+								</form>								
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Product -->
+
+		<div class="container">
+
+			<!-- Reviews -->
+
+			<div class="row">
+				<div class="col">
+					<div class="reviews">
+						<div class="reviews_title">제품목록</div>
+						<div class="reviews_container">
+						
+							<ul>
+								<!-- Review -->
+								<li th:if="${ #lists.size(products) } > 0" th:each="product : ${ products }" class="clearfix">
+									
+									<div th:each="file : ${ product.fileList }" class="review_image">
+									<a href="#" th:style="'background-image: url(' + @{/upload-files/} + ${ file.savedfilename } + ')'"></a>
+			    					</div>
+			    					
+									<div class="review_content">
+																				
+										<div class="review_name"><a href="#" th:text="${ product.categoryA }" style="margin-right: 6px;"></a><a href="#" th:text="${ product.categoryB }"></a></div>																			
+										<div class="review_name"><a href="#" th:text="${ product.productname }" style="font-size: 23px; font-weight: 900;"></a></div>	
+										<div class="review_name"><a href="#" th:text="${ product.saleprice }+원" style="margin-right: 6px; font-size: 23px; font-weight: 900;"></a><a href="#" style="text-decoration: line-through;" th:text="${ product.price }+원"></a></div>										
+										<hr>
+										<div class="review_date" th:text="${ product.color }"></div>
+										<div th:if="${ product.shipping } == true" class="review_date">배송비 무료</div>
+										<div th:if="${ product.shipping } != true" class="review_date">배송비 3000원</div>
+										
+										<div class="review_date">
+										<a href="#" th:if="${ product.ssize } == true" style="margin-right: 6px;">Small S 사이즈</a>
+										<a href="#" th:if="${ product.msize } == true" style="margin-right: 6px;">Medium M 사이즈</a>
+										<a href="#" th:if="${ product.lsize } == true" style="margin-right: 6px;">Large L 사이즈</a>
+										<a href="#" th:if="${ product.elsize } == true" style="margin-right: 6px;">Extra Large XL 사이즈</a>
+										</div>										
+										<hr>																			
+										<div class="review_name"><a href="#" th:text="${ product.contents }"></a></div>
+										</div>
+									</div>
+								</li>																
+							</ul>							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</div>
+
+	<footer th:include="footer :: footer"> </footer>
+
+	
+	
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/product_custom.js"></script>
+</body>
+</html>

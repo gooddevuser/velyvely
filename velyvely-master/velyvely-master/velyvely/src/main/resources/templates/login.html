@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Checkout</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Wish shop project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="styles/checkout.css">
+<link rel="stylesheet" type="text/css" href="styles/checkout_responsive.css">
+<style type="text/css">
+button {font-size:15px !important; letter-spacing:-1px !important;}
+.review_form_button {background-color:black;}
+.checkout_title{font-family: 'Open Sans', sans-serif;}
+.form_button {    width: 179px;
+    height: 46px;
+    border: none;
+    outline: none;
+    background: black;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    margin-top: 18px;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    transition: all 200ms ease;}
+</style>
+</head>
+<body>
+
+<div class="super_container">
+	
+	<header th:include="header :: header"> </header>
+
+	<!-- Home -->
+
+	<div class="home">
+		<div class="home_background parallax-window" data-parallax="scroll" data-image-src="images/categories.jpg" data-speed="0.8"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="home_container">
+						<div class="home_content">
+							<div class="home_title">Login</div>
+							<div class="breadcrumbs">
+								<ul>
+									<li><a href="home">Home</a></li>
+									<li>Login</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Checkout -->
+
+	<div class="checkout">
+		<div class="container">
+			<div class="row">
+
+				<!-- Billing Details -->
+				<div class="col-lg-12">
+					<div class="billing">
+						<div class="checkout_title">로그인</div>
+						
+							<form action="login" id="checkout_form" method="post">
+								<div class="checkout_form_container">
+								<input type="text" class="checkout_input" placeholder="아이디" id="id" name="id">
+								<input type="password" class="checkout_input" placeholder="비밀번호" required="required" id="passwd" name="passwd">
+								<button type="submit" class="form_button">로그인 하기</button>
+								</div>
+							</form>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"> </footer>
+	
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/parallax-js-master/parallax.min.js"></script>
+<script src="js/checkout_custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<div th:fragment="adminheader">
+<style type="text/css">
+.main_nav ul li {margin-right: 30px;}
+.main_nav ul li a {font-size:15px; letter-spacing: -1px; font-weight: 400; color: #fff;}
+.menu_nav ul li a {font-size:15px; letter-spacing: -1px; font-weight: 400; color: #fff;}
+.search_input {background-color:#fff; border:2px solid black;}
+.logo a {font-family: 'Open Sans', sans-serif; font-weight: 900; color: #fff;}
+.cart_num_container, .star_num_container {background-color:black;}
+.header{background-color:black;}
+.burger_container div{background-color:#fff;}
+.menu{background-color:black;}
+.menu_close div{background-color:#fff;}
+</style>
+<header class="header">
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a href="home">VelyVely</a></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a href="adminMemberList">고객목록</a></li>
+					<li><a href="adminProduct">제품등록</a></li>
+					<li><a href="adminProductList">제품목록</a></li>
+					<li><a href="adminBanner">배너관리</a></li>
+					
+					<li th:if="${session.loginuser == null}"><a href="login">로그인</a></li>
+					<li th:if="${session.loginuser == null}"><a href="register">회원가입</a></li>
+					<li th:if="${session.loginuser != null}"><a href="mypage" th:text="${ session.loginuser.name }+님"></a></li>
+					<li th:if="${session.loginuser != null}"><a href="admin">관리자</a></li>
+					<li th:if="${session.loginuser != null}"><a href="logout" >로그아웃</a></li>
+				</ul>
+			</nav>
+			<div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"><div></div><div></div><div></div></div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<div class="logo menu_mm"><a href="home">VelyVely</a></div>
+		<nav class="menu_nav">
+			<ul class="menu_mm">
+				<li><a href="adminMemberList">고객목록</a></li>
+					<li><a href="adminProduct">제품등록</a></li>
+					<li><a href="adminProductList">제품목록</a></li>
+					<li><a href="adminbanner">배너관리</a></li>
+					
+					<li th:if="${session.loginuser == null}"><a href="login">로그인</a></li>
+					<li th:if="${session.loginuser == null}"><a href="register">회원가입</a></li>
+					<li th:if="${session.loginuser != null}"><a href="mypage" th:text="${ session.loginuser.name }+님"></a></li>
+					<li th:if="${session.loginuser != null}"><a href="admin">관리자</a></li>
+					<li th:if="${session.loginuser != null}"><a href="logout" >로그아웃</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>

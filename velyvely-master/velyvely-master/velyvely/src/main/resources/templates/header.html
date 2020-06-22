@@ -1,0 +1,97 @@
+<div th:fragment="header">
+<style type="text/css">
+.main_nav ul li {margin-right: 30px;}
+.main_nav ul li a {font-size:15px; letter-spacing: -1px; font-weight: 400;}
+.menu_nav ul li a {font-size:15px; letter-spacing: -1px; font-weight: 400;}
+.search_input {background-color:#fff; border:2px solid black;}
+.logo a {font-family: 'Open Sans', sans-serif; font-weight: 900; color: black;}
+.cart_num_container, .star_num_container {background-color:black;}
+</style>
+<header class="header">
+		<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div class="logo"><a href="home">VelyVely</a></div>
+			<nav class="main_nav">
+				<ul>
+					<li><a href="clothes">의류</a></li>
+					<li><a href="accessories">악세사리</a></li>
+					<li><a href="underclothes">속옷</a></li>
+					<li><a href="contact">찾아오시는길</a></li>
+					
+					<li th:if="${session.loginuser == null}"><a href="login">로그인</a></li>
+					<li th:if="${session.loginuser == null}"><a href="register">회원가입</a></li>
+					<li th:if="${session.loginuser != null}"><a href="mypage" th:text="${ session.loginuser.name }+님"></a></li>
+					<li th:if="${session.loginuser != null}"><a href="admin">관리자</a></li>
+					<li th:if="${session.loginuser != null}"><a href="logout" >로그아웃</a></li>
+				</ul>
+			</nav>
+			<div class="header_content ml-auto">
+				<div class="search header_search">
+				
+					<form action="product" method="post">
+						<input type="text" class="search_input" required="required" id="productname" name="productname">
+						<button type="submit" id="search_button" class="search_button"><img src="images/magnifying-glass.svg" alt=""></button>
+					</form>
+					
+				</div>
+				<div class="shopping">
+					<!-- Cart -->
+					<a href="cart">
+						<div class="cart">
+							<i class="fa fa-shopping-cart" style="font-size: 25px; color: black;" aria-hidden="true"></i>
+								<div class="cart_num_container">
+								<div class="cart_num_inner">
+									<div class="cart_num">1</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<!-- Star -->
+					<a href="checkout">
+						<div class="star">
+							<i class="fa fa-star-o" style="font-size: 25px; color: black;" aria-hidden="true"></i>
+							<div class="star_num_container">
+								<div class="star_num_inner">
+									<div class="star_num">0</div>
+								</div>
+							</div>
+						</div>
+					</a>
+					<!-- Avatar -->
+					<a href="product">
+						<div class="avatar">
+							<i class="fa fa-user-circle-o" style="font-size: 25px; color: black;"aria-hidden="true"></i>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"><div></div><div></div><div></div></div>
+		</div>
+	</header>
+
+	<!-- Menu -->
+
+	<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+		<div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+		<div class="logo menu_mm"><a href="home">VelyVely</a></div>
+		<div class="search">
+			<form action="#">
+				<input type="search" class="search_input menu_mm" required="required">
+				<button type="submit" id="search_button_menu" class="search_button menu_mm"><img class="menu_mm" src="images/magnifying-glass.svg" alt=""></button>
+			</form>
+		</div>
+		<nav class="menu_nav">
+			<ul class="menu_mm">
+				<li><a href="clothes">의류</a></li>
+					<li><a href="accessories">악세사리</a></li>
+					<li><a href="categories">속옷</a></li>
+					<li><a href="contact">찾아오시는길</a></li>
+					<li th:if="${session.loginuser == null}"><a href="login">로그인</a></li>
+					<li th:if="${session.loginuser == null}"><a href="register">회원가입</a></li>
+					<li th:if="${session.loginuser != null}"><a href="mypage" th:text="${ session.loginuser.name }+님"></a></li>
+					<li th:if="${session.loginuser != null}"><a href="admin">관리자</a></li>
+					<li th:if="${session.loginuser != null}"><a href="logout" >로그아웃</a></li>
+			</ul>
+		</nav>
+	</div>
+</div>
